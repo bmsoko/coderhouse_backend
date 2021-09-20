@@ -12,16 +12,21 @@ class Contenedor {
     };
 
     async save(objeto) {
+      let jsonIntermidiateFile;
       if(this.exists()){ // Verificamos que exista el archivo primero.
         // Existe, entonces primero lo leo, para ver su contenido.
         try{
             await fs.promises.readFile(this.pathToFile, 'utf-8')
             .then(contenido => {
+                if (contenido != 0){ 
+                jsonIntermidiateFile = JSON.parse(contenido)
+                jsonIntermidiateFile.forEach(element => {
+                this.objetoArray.push(element)
+                });
+                }
                 // con el contenido del archivo, voy a intentar colocar el primero, o agregar si ya tiene
                 this.objetoFormateado = this.formatObjeto(contenido, objeto); // Dentro
                 this.objetoArray.push(this.objetoFormateado);
-                console.log("Objeto array")
-                console.log(this.objetoArray)
             })            
         }
         catch(err) {
@@ -29,8 +34,8 @@ class Contenedor {
         }
        // Ya lo modifique al objeto, ahora modifico el archivo
         try {
-            await fs.promises.appendFile(this.pathToFile, JSON.stringify(this.objetoArray, null, 4));
-            console.log('Agregue al archivo')
+            await fs.promises.writeFile(this.pathToFile, JSON.stringify(this.objetoArray, null, 4));
+            console.log('Agregue al archivo el id: ' + this.objetoFormateado.id)
             return this.objetoFormateado.id;
 
         } catch (err){
@@ -52,7 +57,32 @@ class Contenedor {
 
     
 
-    async getById(pathToFile){
+    async getById(id){
+    let found = false;
+    var jsonIntermidiateFile = JSON;
+        try{
+            await fs.promises.readFile(this.pathToFile, 'utf-8')
+            .then(contenido => {
+                if (contenido.length != 0){ 
+                jsonIntermidiateFile = JSON.parse(contenido)
+                jsonIntermidiateFile.forEach(element => {
+
+                    if (element.id == id){
+                        console.log(`Se encontro element con id ${id} el objeto encontrado es ${JSON.stringify(element)}`)
+                        found = true;
+                        return element;
+                    }
+                });
+                }
+                if (!found){
+                    console.log(`El objeto es ${null}, no se encontro elemento con ese id`)
+                    return null;
+                }
+            })            
+        }
+        catch(err) {
+            console.log(err)
+        }
 
     };
 
@@ -78,7 +108,6 @@ class Contenedor {
     async exists(){
         try {
             await fs.promises.access(this.pathToFile)
-            console.log('Existe el archivo: ' + this.pathToFile)
             return true
           } catch {
             return false
@@ -97,7 +126,6 @@ class Contenedor {
             
         }else { // Sino significa que ya tiene algo
             var jsonFile = JSON
-            console.log('Este es el JSON')
             jsonFile = JSON.parse(contenido)
             objeto = {
                 'id': jsonFile.length + 1,
