@@ -54,19 +54,17 @@ class Contenedor {
       }
         
     };
-
-    
+  
 
     async getById(id){
     let found = false;
-    var jsonIntermidiateFile = JSON;
+    let jsonIntermidiateFile = JSON;
         try{
             await fs.promises.readFile(this.pathToFile, 'utf-8')
             .then(contenido => {
                 if (contenido.length != 0){ 
                 jsonIntermidiateFile = JSON.parse(contenido)
                 jsonIntermidiateFile.forEach(element => {
-
                     if (element.id == id){
                         console.log(`Se encontro element con id ${id} el objeto encontrado es ${JSON.stringify(element)}`)
                         found = true;
@@ -86,22 +84,66 @@ class Contenedor {
 
     };
 
-    async getAll(pathToFile){
-
+    async getAll(){
+        let jsonIntermidiateFile = JSON;
+        let arrayElements = []
+        try{
+            await fs.promises.readFile(this.pathToFile, 'utf-8')
+            .then(contenido => {
+                if (contenido.length != 0){ 
+                jsonIntermidiateFile = JSON.parse(contenido)
+                jsonIntermidiateFile.forEach(element => {
+                    arrayElements.push(JSON.stringify(element))
+                });
+                console.log(`Se creo el array: ${arrayElements}`)
+                return arrayElements
+                }
+            })            
+        }
+        catch(err) {
+            console.log(err)
+        }
     };
 
     async deleteById(id){
+        let jsonIntermidiateFile = JSON;
+        let arrayIntermediate = [];
+        try{
+            await fs.promises.readFile(this.pathToFile, 'utf-8')
+            .then(contenido => {
+                if (contenido != 0){ 
+                jsonIntermidiateFile = JSON.parse(contenido)
+                jsonIntermidiateFile.forEach(element => {
+                    if(element.id != id) {
+                        arrayIntermediate.push(element)
+                    }
+                });
+                }
+            })            
+        }
+        catch(err) {
+            console.log(err)
+        }
 
-        jsonFile.forEach(element => {
-            if (element.id === id)
-            console.log('This is the element')
-            console.log(element.id)
-
-        });
-
+               // Ya lo modifique al objeto, ahora modifico el archivo
+        try {
+                await fs.promises.writeFile(this.pathToFile, JSON.stringify(arratIntermediate, null, 4));
+                console.log(`Borre del archivo el id: ${id}`);                
+    
+            } catch (err){
+                console.log('Se encontro un error al agregar objeto: ' + err + this.objetoFormateado);
+            }
     };
 
-    async deleteAll(pathToFile){
+    async deleteAll(){
+        let arrayIntermediate = []
+        try {
+            await fs.promises.writeFile(this.pathToFile, JSON.stringify(arrayIntermediate, null, 4));
+            console.log(`Borre todos los elements del archivo el id: ${this.pathToFile}`);                
+
+        } catch (err){
+            console.log('Se encontro un error al agregar objeto: ' + err );
+        }
 
     };
 

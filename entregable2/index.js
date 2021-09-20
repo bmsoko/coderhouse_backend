@@ -12,3 +12,9 @@ miCont.save(producto)
 
 
 miCont.getById(4)
+
+miCont.getAll()
+
+miCont.deleteById(5);
+
+miCont.deleteAll()
