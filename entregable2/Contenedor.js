@@ -18,6 +18,7 @@ class Contenedor {
         try{
             await fs.promises.readFile(this.pathToFile, 'utf-8')
             .then(contenido => {
+                // Saco el contenido existente del archivo y lo agrego a un array si es que tiene algun elemento
                 if (contenido != 0){ 
                 jsonIntermidiateFile = JSON.parse(contenido)
                 jsonIntermidiateFile.forEach(element => {
@@ -65,6 +66,7 @@ class Contenedor {
                 if (contenido.length != 0){ 
                 jsonIntermidiateFile = JSON.parse(contenido)
                 jsonIntermidiateFile.forEach(element => {
+                    // recorro toda la lista, cuando encuentro el que necesito, corto la busqueda.
                     if (element.id == id){
                         console.log(`Se encontro element con id ${id} el objeto encontrado es ${JSON.stringify(element)}`)
                         found = true;
@@ -72,6 +74,7 @@ class Contenedor {
                     }
                 });
                 }
+                // si el flag no se seteo en TRUE significa que el elemento no existe.
                 if (!found){
                     console.log(`El objeto es ${null}, no se encontro elemento con ese id`)
                     return null;
@@ -85,6 +88,7 @@ class Contenedor {
     };
 
     async getAll(){
+        // consigna dice devolver en formato de array.
         let jsonIntermidiateFile = JSON;
         let arrayElements = []
         try{
@@ -125,7 +129,7 @@ class Contenedor {
             console.log(err)
         }
 
-               // Ya lo modifique al objeto, ahora modifico el archivo
+      // Ya lo encontre al objeto a eliminar, ahora modifico el archivo
         try {
                 await fs.promises.writeFile(this.pathToFile, JSON.stringify(arratIntermediate, null, 4));
                 console.log(`Borre del archivo el id: ${id}`);                
@@ -136,6 +140,7 @@ class Contenedor {
     };
 
     async deleteAll(){
+        // De acuero a la consigna, dice eliminar todos los elementos presentes en el archivo, pero no dice eliminar el archivo.
         let arrayIntermediate = []
         try {
             await fs.promises.writeFile(this.pathToFile, JSON.stringify(arrayIntermediate, null, 4));
@@ -166,10 +171,11 @@ class Contenedor {
             }           
             return objeto
             
-        }else { // Sino significa que ya tiene algo
+        }else { // Sino significa que ya tiene algo 
             var jsonFile = JSON
             jsonFile = JSON.parse(contenido)
             objeto = {
+                // y en base a la cantidad de elementos sumamos 1
                 'id': jsonFile.length + 1,
                 'title': objeto.title,
                 'price': objeto.price,
