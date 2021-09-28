@@ -16,19 +16,14 @@ server.listen(PORT, () => {
 })
 
 server.get('/productos', async (request, response, next) => {
-    const productos = await miCont.getAll();
-    response.send({productos : productos});
-});
-
-
-server.get('/productos', async (request, response, next) => {
-    const productos = await miCont.getAll();
+    const productos = await miCont.getAllJSON();
     response.send(productos);
 });
 
 server.get('/productosRandom', async (request, response, next) => {
-    const productos = await miCont.getAll();
+    const productos = await miCont.getAllJSON();
     const id = randomNumber(1, productos.length)
+
     const productoRandom = await miCont.getById(id);
     response.send(productoRandom);
 });

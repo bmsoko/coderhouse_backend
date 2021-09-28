@@ -70,7 +70,7 @@ class Contenedor {
 
     };
 
-    async getAll(){
+    async getAllJSON(){
         try{
             const contenido = await fs.promises.readFile(this.pathToFile, 'utf-8');
             const listadoProductos = JSON.parse(contenido)
@@ -82,6 +82,29 @@ class Contenedor {
             console.log(err)
         }
     };
+    async getAllArray(){
+        // consigna dice devolver en formato de array.
+        let jsonIntermidiateFile = JSON;
+        let arrayElements = []
+        try{
+            await fs.promises.readFile(this.pathToFile, 'utf-8')
+            .then(contenido => {
+                if (contenido.length != 0){ 
+                jsonIntermidiateFile = JSON.parse(contenido)
+                jsonIntermidiateFile.forEach(element => {
+                    arrayElements.push(JSON.stringify(element))
+                });
+                console.log(`Se creo el array: ${arrayElements}`)
+                console.log(typeof JSON.parse([arrayElements]))
+                return arrayElements
+                }
+            })            
+        }
+        catch(err) {
+            console.log(err)
+        }
+    };
+
 
     async deleteById(id){
         let jsonIntermidiateFile = JSON;
