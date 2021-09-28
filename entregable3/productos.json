@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Jabon Cuerpo",
+        "price": 0.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 2,
+        "title": "Jabon Tocador",
+        "price": 1.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 3,
+        "title": "Jabon En Barra",
+        "price": 839,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 4,
+        "title": "Jabon Rop",
+        "price": 18.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 5,
+        "title": "Jabon En Polvo",
+        "price": 82.9,
+        "thumbnail": "http://google.com"
+    }
+]
