@@ -153,43 +153,27 @@ class Contenedor {
     };
 
     async updateById(id, element) {
-        // obtenemos la lista entera de elementos
         const list = await this.getAllJSON();
 
-        // buscamos el elemento por id a actualizar y tambien indice en la lista
         const elementSaved = list.find((item) => item.id === parseInt(id));
         const indexElementSaved = list.findIndex((item) => item.id === parseInt(id));
 
-        // checkeamos que existe el elemento, sino exite devolvemos null y mostramos error
         if (!elementSaved) {
             console.error(`Elemento con el id: '${id}' no fue encontrado`);
             return null;
         }
 
-        // armamos el elemento actualizado con lo guardado y lo nuevo
-        // ... spread operator
         const elementUpdated = {
-            ...elementSaved, // copio todos los atributo de elementSaved en elementUpdated
-            ...element // copio y piso todos los atributo de element en elementUpdated
+            ...elementSaved, 
+            ...element 
         };
-        console.log("elementUpdated")
-        console.log(elementUpdated)
-        console.log("elementSaved")
-        console.log(elementSaved)
-        console.log("element")
-        console.log(element)
 
 
-        // ponemos el elemento nuevo en la lista 
         list[indexElementSaved] = elementUpdated;
-        console.log('list[indexElementSaved]')
-        console.log(list[indexElementSaved])
-
-        // guardamos la lista
+     
         const elementsString = JSON.stringify(list, null, 4);
         await fs.promises.writeFile(`./${this.pathToFile}`, elementsString);
 
-        // retornamos el elemento actualizado
         return elementUpdated;
     };
 
