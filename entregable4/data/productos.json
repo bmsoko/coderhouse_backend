@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "title": "Jabon Cuerpo",
+        "price": 0.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 2,
+        "title": "Producto de Prueba desde el put",
+        "price": 999,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 3,
+        "title": "Jabon En Barra",
+        "price": 839,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 4,
+        "title": "Jabon Rop",
+        "price": 18.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 5,
+        "title": "Jabon Vegetariano 1222",
+        "price": 1.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 6,
+        "title": "Producto de Prueba",
+        "price": 20000,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 7,
+        "title": "Producto de Prueba 2",
+        "price": 34034,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 8,
+        "title": "Producto de Prueba 5",
+        "price": 34034,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 9,
+        "title": "Producto de Prueba 6",
+        "price": 34034,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 10,
+        "title": "Producto de Prueba 26",
+        "price": 34034,
+        "thumbnail": "http://google.com"
+    }
+]
