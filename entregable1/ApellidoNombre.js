@@ -38,6 +38,7 @@ class ApellidoNombre{
 
 };
 
+
 const persona = new ApellidoNombre('Estanislao', 'Soko', [{nombreLibro: 'Harry Potter', autorLibro: 'J.K. Rowling'}], ['Balloo', 'Pascal']);
 
 persona.getFullName();
