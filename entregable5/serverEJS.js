@@ -1,8 +1,6 @@
 
 const express = require('express');
 
-var bodyParser = require('body-parser');
-
 const Contenedor = require('./Contenedor');
 
 const productosContenedor = new Contenedor('./data/productos.json');
@@ -12,9 +10,9 @@ const app = express();
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
-app.set("views",  __dirname + "./views");
+app.set("views", __dirname + "/views");
 
-app.set("view engine", "pug");
+app.set("view engine", "ejs");
 
 
 
@@ -22,7 +20,7 @@ app.use(express.static('public'));
 
 
 app.get("/", (req, res) => {
-    res.render("crearproducto.pug", {mensaje: "Ingreso de Producto", title: "Creacion de Productos"})
+    res.render("index", {mensaje: "Ingreso de Producto", title: "Creacion de Productos"})
   })
 
 app.post('/', async (req, res) => {
@@ -30,13 +28,16 @@ app.post('/', async (req, res) => {
     console.log(req.body)
     const idProductoGuardado = await productosContenedor.save(nuevoProducto);
 
-    res.render("crearproducto.pug", {id: idProductoGuardado})
+    res.render("index", {id: idProductoGuardado})
   })
 
 app.get("/productos", async (req, res) => {
     const allProducts = await productosContenedor.getAllJSON();
-    res.render("productos.pug", {title: "Lista De Productos", productos: allProducts, listExists: true})
+    res.render("listadoproductos", {title: "Lista De Productos", productos: allProducts, listExists: true})
   })
   
+app.use((req, res, next) => {
+  res.status(404).render('404')
+})  
 
 app.listen(8080, () => console.log('Running in 8080'));
