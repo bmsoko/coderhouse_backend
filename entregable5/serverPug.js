@@ -22,21 +22,21 @@ app.use(express.static('public'));
 
 
 app.get("/", (req, res) => {
-    res.render("crearproducto.pug", {mensaje: "Ingreso de Producto"})
+    res.render("crearproducto.pug", {mensaje: "Ingreso de Producto", title: "Creacion de Productos"})
   })
 
-// app.post('/', async (req, res) => {
-//     const nuevoProducto = req.body;  
-//     console.log(req.body)
-//     const idProductoGuardado = await productosContenedor.save(nuevoProducto);
+app.post('/', async (req, res) => {
+    const nuevoProducto = req.body;  
+    console.log(req.body)
+    const idProductoGuardado = await productosContenedor.save(nuevoProducto);
 
-//     res.render("main", {id: idProductoGuardado})
-//   })
+    res.render("crearproducto.pug", {id: idProductoGuardado})
+  })
 
-// app.get("/productos", async (req, res) => {
-//     const allProducts = await productosContenedor.getAllJSON();
-//     res.render("productos", {title: "Lista De Products", productos: allProducts, listExists: true})
-//   })
+app.get("/productos", async (req, res) => {
+    const allProducts = await productosContenedor.getAllJSON();
+    res.render("productos.pug", {title: "Lista De Productos", productos: allProducts, listExists: true})
+  })
   
 
 app.listen(8080, () => console.log('Running in 8080'));
