@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "title": "Helado",
+        "price": "123",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/ice-cream-cup-sweets-frozen-48.png"
+    },
+    {
+        "id": 2,
+        "title": "Onion Ring",
+        "price": "22222",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/instant-noodles-food-cup-precooked-48.png"
+    }
+]
