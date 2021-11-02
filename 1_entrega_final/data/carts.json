@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "date": 1635813138197,
+        "products": [
+            {
+                "id": 1,
+                "name": "Prueba",
+                "description": "Producto de prueba",
+                "code": 123,
+                "thumbnail": "http://google.com",
+                "price": 123
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "date": 1635813156970
+    }
+]
