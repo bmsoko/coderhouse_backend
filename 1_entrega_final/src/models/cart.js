@@ -12,35 +12,32 @@ const deleteCart = async (idCart) => {
   return idCart;
 };
 
-const getProductsByIdCard = async (id) => {
+const getProductsByIdCart = async (id) => {
   const cart = await cartContenedor.getById(id);
   const { products } = cart;
   return products;
 };
 
-const addProductsToCart = async (id, update) =>  {
-  const cartUpdated = await cartContenedor.updateById(id, update);
+const addProductsToCart = async (id, listProducts) =>  {
+  const cartUpdated = await cartContenedor.updateById(id, listProducts);
   return cartUpdated;
 };
 
 const deleteProductFromCart = async (id, idProduct) =>  {
   const cart = await cartContenedor.getById(id);
   const { products } = cart;
-
-  products.splice(idProduct, 1);
-
+  products.splice(parseInt(idProduct), 1);
   const newCart = {
-    ...cart,
     products
   }
-  const cartUpdated = await cartContenedor.update(id, newCart);
+  const cartUpdated = await cartContenedor.updateById(id, newCart);
   return cartUpdated;
 };
 
 module.exports = {
   createCart,
   deleteCart,
-  getProductsByIdCard,
+  getProductsByIdCart,
   addProductsToCart,
   deleteProductFromCart
 };

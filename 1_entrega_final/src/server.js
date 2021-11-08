@@ -8,9 +8,9 @@ const PORT = 8080;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-app.get('/', (req, res) => res.send({data: Date.now()}))
+app.get('/', (req, res) => res.send({message: 'Server up & Running', data: Date.now()}))
 
 app.use('/api/products', productRouter);
-app.use('/api/cart', cartRouter);
+app.use('/api/carts', cartRouter);
 
 app.listen(PORT, () => console.log('Running in 8080'));

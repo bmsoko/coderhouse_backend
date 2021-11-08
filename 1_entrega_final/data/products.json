@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "title": "Producto de Prueba desde el put",
+        "price": 999,
+        "thumbnail": "http://google.com",
+        "date": 1636389351418
+    }
+]

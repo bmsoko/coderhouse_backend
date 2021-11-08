@@ -153,25 +153,32 @@ class Contenedor {
     };
 
     async updateById(id, element) {
-        const list = await this.getAllJSON();
+        const list = await this.getAllJSON(); // TODO el json de carritos/productos
+        let elementUpdated = {} //inicializo 
+        const elementSaved = list.find((item) => item.id === parseInt(id)); // Busco el elemento
+        const indexElementSaved = list.findIndex((item) => item.id === parseInt(id)); // posición dondee lo encontró
 
-        const elementSaved = list.find((item) => item.id === parseInt(id));
-        const indexElementSaved = list.findIndex((item) => item.id === parseInt(id));
-
-        if (!elementSaved) {
+        if (!elementSaved) { // si esta vacio significa que no esta en la lista
             console.error(`Elemento con el id: '${id}' no fue encontrado`);
             return null;
         }
 
-        const elementUpdated = {
-            ...elementSaved, 
-            ...element 
-        };
-
+        if ('products' in elementSaved){ // si tiene products significa q es un carrito por ende tengo que  actualizar los productos no ma
+            elementSaved['products'] = element;
+            elementUpdated = {
+                ...elementSaved
+            };
+        } else { // si no q es un producto
+         elementUpdated = {
+                ...elementSaved, 
+                ...element 
+            };
+        }
+        
 
         list[indexElementSaved] = elementUpdated;
-     
         const elementsString = JSON.stringify(list, null, 4);
+
         await fs.promises.writeFile(`./${this.pathToFile}`, elementsString);
 
         return elementUpdated;
@@ -189,21 +196,14 @@ class Contenedor {
     formatObjeto(contenido, objeto) {
         if (contenido.length == 0) { // Preguntamos si el archivo tiene contenido
             if ('products' in objeto) {
+                console.log("pase por el if en fotmatObject")
+                console.log(objeto['products'])
+                if (objeto['products'] == 0)
                 objeto = 
                 {
                 "id": 1,
                 "date": Date.now(),
-                "products": [
-                    {
-                        "id": objeto["products"][0]["id"],
-                        "name": objeto["products"][0]["name"],
-                        "description": objeto["products"][0]["description"],
-                        "code": objeto["products"][0]["code"],
-                        "thumbnail": objeto["products"][0]["thumbnail"],
-                        "price": objeto["products"][0]["price"],
-                        "stock": objeto["products"][0]["products"]
-                    }
-                ]
+                "products": []
             }
             } else {
                 objeto = {

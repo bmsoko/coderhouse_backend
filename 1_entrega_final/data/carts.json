@@ -1,20 +1,15 @@
 [
     {
         "id": 1,
-        "date": 1635813138197,
-        "products": [
+        "date": 1636395334677,
+        "products": [    
             {
-                "id": 1,
-                "name": "Prueba",
-                "description": "Producto de prueba",
-                "code": 123,
-                "thumbnail": "http://google.com",
-                "price": 123
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "date": 1635813156970
+            "id": 1,
+            "title": "Producto de Prueba desde el put",
+            "price": 999,
+            "thumbnail": "http://google.com",
+            "date": 1636389351418
+        }]
+        
     }
 ]

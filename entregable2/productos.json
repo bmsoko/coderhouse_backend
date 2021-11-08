@@ -4,5 +4,17 @@
         "title": "Jabon Liquido",
         "price": 8.9,
         "thumbnail": "http://google.com"
+    },
+    {
+        "id": 2,
+        "title": "Jabon Liquido",
+        "price": 8.9,
+        "thumbnail": "http://google.com"
+    },
+    {
+        "id": 3,
+        "title": "Jabon Liquido",
+        "price": 8.9,
+        "thumbnail": "http://google.com"
     }
 ]

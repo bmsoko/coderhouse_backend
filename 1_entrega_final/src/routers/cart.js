@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCart, deleteCart, addProductsToCart, getProductsByIdCard, deleteProductFromCart } = require('../models/cart');
+const { createCart, deleteCart, addProductsToCart, getProductsByIdCart, deleteProductFromCart } = require('../models/cart');
 
 const cartRouter = express.Router();
 
@@ -13,7 +13,7 @@ cartRouter.post('/', async (req, res) => {
 });
 
 cartRouter.delete('/:id', async (req, res) => {
-  const cart = req.body;
+  const cart = req.body.id;
 
   const idCartDeleted = await deleteCart(cart);
 
@@ -22,20 +22,19 @@ cartRouter.delete('/:id', async (req, res) => {
 
 cartRouter.get('/:id/productos', async (req, res) => {
   const cartId = req.params.id;
-  console.log({cartId})
-  const list = await getProductsByIdCard(cartId);
-  console.log({list})
-
+  const list = await getProductsByIdCart(cartId);
+  console.log(typeof{list})
+  const propertyNames = Object.entries(list);
+  console.log(propertyNames)
   res.send({ data: list });
 });
 
 cartRouter.post('/:id/productos', async (req, res) => {
-  const cartId = req.params.id;
-  const cartUpdate = req.body;
-
-  const cart = await addProductsToCart(cartId, cartUpdate);
-
-  res.send({ data: cart });
+  const cartId = req.params.id; //id del carrito
+  let listProducts = await getProductsByIdCart(cartId); // busco los productos del carrito
+  listProducts.push(req.body)
+  const cart = await addProductsToCart(cartId, listProducts);
+  res.send({ data: cart }); 
 });
 
 cartRouter.delete('/:id/productos/:id_prod', async (req, res) => {

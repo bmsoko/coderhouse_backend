@@ -20,6 +20,23 @@ productRouter.post('/', isAdmin, async (req, res) => {
 });
 
 
+productRouter.get('/:id', async (req, res) => {
+    const producto = await productosContenedor.getById(req.params.id);
+    console.log(producto)
+    if(!producto){
+        res.send({
+            message: 'No products were found with that Id',
+          });
+    } else {
+        res.send({
+            message: 'success',
+            data: producto
+        });
+    }
+
+})
+
+
 productRouter.delete('/:id', async (req, res) => {
   const idProductoBorrado = await deleteById(req.params.id);
 
